@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "review-input.v1",
+  "title": "Contract Review Input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "version_id",
+    "batch_id",
+    "workflow_version",
+    "knowledge_release_id",
+    "classification",
+    "clauses",
+    "context"
+  ],
+  "properties": {
+    "schema_version": { "const": "review-input.v1" },
+    "task_id": { "type": "string", "format": "uuid" },
+    "version_id": { "type": "string", "format": "uuid" },
+    "batch_id": { "type": "string", "format": "uuid" },
+    "workflow_version": { "type": "string", "minLength": 1 },
+    "knowledge_release_id": { "type": "string", "format": "uuid" },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["primary_type", "secondary_tags"],
+      "properties": {
+        "primary_type": { "type": "string" },
+        "secondary_tags": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "clauses": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["clause_id", "text", "location"],
+        "properties": {
+          "clause_id": { "type": "string", "format": "uuid" },
+          "text": { "type": "string", "minLength": 1 },
+          "location": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["our_role", "business_background"],
+      "properties": {
+        "our_role": { "type": "string" },
+        "business_background": { "type": "string" }
+      }
+    }
+  }
+}

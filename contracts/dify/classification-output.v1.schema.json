@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "classification-output.v1",
+  "title": "Contract Classification Output v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "workflow_version",
+    "type_catalog_version",
+    "run_id",
+    "primary_type",
+    "secondary_tags",
+    "alternatives",
+    "confidence",
+    "evidence_summary",
+    "requires_human_confirmation"
+  ],
+  "properties": {
+    "schema_version": { "const": "classification-output.v1" },
+    "workflow_version": { "type": "string", "minLength": 1 },
+    "type_catalog_version": { "type": "string", "minLength": 1 },
+    "run_id": { "type": "string", "minLength": 1 },
+    "primary_type": { "$ref": "#/$defs/contractType" },
+    "secondary_tags": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string" }
+    },
+    "alternatives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "confidence"],
+        "properties": {
+          "type": { "$ref": "#/$defs/contractType" },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+    "evidence_summary": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "requires_human_confirmation": { "type": "boolean" }
+  },
+  "$defs": {
+    "contractType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "label"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+apps/desktop/dist/
+contracts/api/openapi.v1.json
+node_modules/
+.venv/
+.uv-cache/

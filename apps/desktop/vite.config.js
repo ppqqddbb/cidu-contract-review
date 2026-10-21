@@ -1,0 +1,8 @@
+export default {
+  base: "./",
+  server: {
+    port: 1420,
+    host: "0.0.0.0",
+    proxy: { "/api": process.env.VITE_API_PROXY_TARGET || "http://127.0.0.1:8000" },
+  },
+};

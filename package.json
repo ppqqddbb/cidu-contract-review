@@ -1,0 +1,6 @@
+{
+  "name": "cidu-contract-review",
+  "private": true,
+  "scripts": {"dev": "pnpm --dir apps/desktop dev", "build": "pnpm --dir apps/desktop build"},
+  "packageManager": "pnpm@10.6.5"
+}

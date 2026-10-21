@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "classification-input.v1",
+  "title": "Contract Classification Input v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "contract_id",
+    "version_id",
+    "type_catalog_version",
+    "content",
+    "context"
+  ],
+  "properties": {
+    "schema_version": { "const": "classification-input.v1" },
+    "task_id": { "type": "string", "format": "uuid" },
+    "contract_id": { "type": "string", "format": "uuid" },
+    "version_id": { "type": "string", "format": "uuid" },
+    "type_catalog_version": { "type": "string", "minLength": 1 },
+    "content": { "type": "string", "minLength": 1 },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["our_role", "business_background", "allowed_types"],
+      "properties": {
+        "our_role": { "type": "string" },
+        "business_background": { "type": "string" },
+        "allowed_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["code", "label", "definition"],
+            "properties": {
+              "code": { "type": "string" },
+              "label": { "type": "string" },
+              "definition": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
